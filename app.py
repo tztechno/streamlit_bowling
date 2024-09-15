@@ -25,7 +25,7 @@ def throw_ball(before):
         return '0000000000'
     candidates = get_candidates(before)
     after = np.random.choice(candidates)
-    time.sleep(1)
+    time.sleep(3)
     return after
 
 # Function to display the current pin status
