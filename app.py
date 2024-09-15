@@ -1,8 +1,8 @@
 import numpy as np
 import time
 import os
-import cv2
 from itertools import combinations
+from PIL import Image
 import streamlit as st
 
 # Function to get candidate states
@@ -25,16 +25,14 @@ def throw_ball(before):
         return '0000000000'
     candidates = get_candidates(before)
     after = np.random.choice(candidates)
-    # Simulate a sound by pausing (you can integrate sound later if needed)
     time.sleep(3)
     return after
 
 # Function to display the current pin status
 def show(status):
     path = os.path.join('path_to_images', status + '.png')
-    img = cv2.imread(path)
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    st.image(img_rgb, width=200)
+    img = Image.open(path)
+    st.image(img, width=200)
 
 # Streamlit app setup
 st.title("Bowling Pin Simulation")
@@ -54,3 +52,4 @@ if st.button('Throw'):
 if st.button('Reset'):
     st.session_state.status = '0000000000'
     show(st.session_state.status)
+
