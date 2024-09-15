@@ -30,7 +30,7 @@ def throw_ball(before):
 
 # Function to display the current pin status
 def show(status):
-    path = os.path.join('path_to_images', status + '.png')
+    path = os.path.join('data', status + '.png')
     img = Image.open(path)
     st.image(img, width=200)
 
