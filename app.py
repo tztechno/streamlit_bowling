@@ -43,7 +43,7 @@ def show(before, after):
         st.image(img_after, caption="After Throw", width=200)
 
 # Streamlit app setup
-st.title("Play Bowling")
+st.title("Bowling Pin Simulation")
 
 # Initialize session state to store the current pin status
 if 'status' not in st.session_state:
