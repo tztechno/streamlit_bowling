@@ -36,6 +36,7 @@ def show(status):
 
 # Streamlit app setup
 st.title("Bowling Simulation")
+st.write("\n")  # Adds a blank line
 
 # Initialize session state to store the current pin status
 if 'status' not in st.session_state:
