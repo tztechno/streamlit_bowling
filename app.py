@@ -32,7 +32,7 @@ def throw_ball(before):
 def show(status):
     path = os.path.join('data', status + '.png')
     img = Image.open(path)
-    st.image(img, width=100)
+    st.image(img, width=200)  # Adjust width if needed
 
 # Streamlit app setup
 st.title("Bowling Simulation")
@@ -41,14 +41,20 @@ st.title("Bowling Simulation")
 if 'status' not in st.session_state:
     st.session_state.status = '0000000000'
 
+# Create columns for buttons
+col1, col2 = st.columns([1, 1])  # Define two columns with equal width
+
+# Add buttons for interaction in columns
+with col1:
+    if st.button('Throw'):
+        st.session_state.status = throw_ball(st.session_state.status)
+        show(st.session_state.status)
+
+with col2:
+    if st.button('Reset'):
+        st.session_state.status = '0000000000'
+        show(st.session_state.status)
+
 # Show the current pin arrangement
 show(st.session_state.status)
 
-# Add buttons for interaction
-if st.button('Throw'):
-    st.session_state.status = throw_ball(st.session_state.status)
-    show(st.session_state.status)
-
-if st.button('Reset'):
-    st.session_state.status = '0000000000'
-    show(st.session_state.status)
