@@ -28,33 +28,38 @@ def throw_ball(before):
     time.sleep(1)
     return after
 
-# Function to display the current pin status
-def show(status):
-    path = os.path.join('data', status + '.png')
-    img = Image.open(path)
-    st.image(img, width=200)  # Adjust width if needed
+# Function to display the current pin status side-by-side
+def show(before, after):
+    col1, col2 = st.columns(2)  # Define two columns with equal width
+
+    with col1:
+        path_before = os.path.join('data', before + '.png')
+        img_before = Image.open(path_before)
+        st.image(img_before, caption="Before Throw", width=100)  # Adjust width as needed
+
+    with col2:
+        path_after = os.path.join('data', after + '.png')
+        img_after = Image.open(path_after)
+        st.image(img_after, caption="After Throw", width=100)  # Adjust width as needed
 
 # Streamlit app setup
-st.title("Bowling Simulation")
+st.title("Bowling Pin Simulation")
 
 # Initialize session state to store the current pin status
 if 'status' not in st.session_state:
     st.session_state.status = '0000000000'
+    st.session_state.after_status = '0000000000'  # Added to track the 'after' status
 
-# Create columns for buttons
-col1, col2 = st.columns([1, 1])  # Define two columns with equal width
+# Display the current pin arrangement
+show(st.session_state.status, st.session_state.after_status)
 
-# Add buttons for interaction in columns
-with col1:
-    if st.button('Throw'):
-        st.session_state.status = throw_ball(st.session_state.status)
-        show(st.session_state.status)
+# Add buttons for interaction
+if st.button('Throw'):
+    st.session_state.after_status = throw_ball(st.session_state.status)
+    st.session_state.status = st.session_state.after_status  # Update 'status' to new state
+    show(st.session_state.status, st.session_state.after_status)
 
-with col2:
-    if st.button('Reset'):
-        st.session_state.status = '0000000000'
-        show(st.session_state.status)
-
-# Show the current pin arrangement
-show(st.session_state.status)
-
+if st.button('Reset'):
+    st.session_state.status = '0000000000'
+    st.session_state.after_status = '0000000000'
+    show(st.session_state.status, st.session_state.after_status)
