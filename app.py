@@ -30,20 +30,20 @@ def throw_ball(before):
 
 # Function to display the current pin status side-by-side
 def show(before, after):
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 1])  # Define two columns with equal width
 
     with col1:
         path_before = os.path.join('data', before + '.png')
         img_before = Image.open(path_before)
-        st.image(img_before, caption="Before Throw", width=200)
+        st.image(img_before, caption="Before Throw", width=300)  # Adjust width as needed
 
     with col2:
         path_after = os.path.join('data', after + '.png')
         img_after = Image.open(path_after)
-        st.image(img_after, caption="After Throw", width=200)
+        st.image(img_after, caption="After Throw", width=300)  # Adjust width as needed
 
 # Streamlit app setup
-st.title("Bowling Pin Simulation")
+st.title("Bowling Simulation")
 
 # Initialize session state to store the current pin status
 if 'status' not in st.session_state:
