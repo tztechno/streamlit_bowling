@@ -25,14 +25,14 @@ def throw_ball(before):
         return '0000000000'
     candidates = get_candidates(before)
     after = np.random.choice(candidates)
-    time.sleep(3)
+    time.sleep(1)
     return after
 
 # Function to display the current pin status
 def show(status):
     path = os.path.join('data', status + '.png')
     img = Image.open(path)
-    st.image(img, width=200)
+    st.image(img, width=100)
 
 # Streamlit app setup
 st.title("Bowling Simulation")
