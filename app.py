@@ -40,7 +40,7 @@ def show(before, after):
         st.image(img_after, caption="After", width=300)  # Changed caption to "After"
 
 # Streamlit app setup
-st.title("Bowling Pin Simulation")
+st.title("Bowling Simulation")
 
 # Initialize session state to store the current pin status
 if 'before_status' not in st.session_state:
